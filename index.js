@@ -10,11 +10,12 @@ window.onload = async () => {
 
 		for (let i = 0; i < 20; i++) {
 			let a = movie_list.data.data.movies[i];
-			console.log(a);
 			let title = document.createElement("p");
 			let img = document.createElement("img");
 			let tag = document.createElement("p");
 			let desc = document.createElement("p");
+
+
 			title.innerText = a.title_long;
 			img.src = a.medium_cover_image;
 			tag.innerText = a.genres;
@@ -22,6 +23,8 @@ window.onload = async () => {
 
 			let card = document.createElement("div");
 			card.classList.add('card');
+			card.id = `card${i}`;
+
 			let imgCard = document.createElement("div");
 			let descCard = document.createElement("div");
 			imgCard.classList.add('img-card');
@@ -30,13 +33,25 @@ window.onload = async () => {
 			descCard.append(title, tag, desc);
 			card.append(imgCard, descCard);
 			app.appendChild(card);
-		}
+
+            let func = function onClickEventHandler(e) {
+                window.location = 'detail.html/?id='+`${a.id}`
+            };
+			card.addEventListener("click", func);
+        }
 
 
-		app.removeChild(loading);
+        app.removeChild(loading);
 
 
 	};
 
 	await main();
 };
+
+
+
+
+
+
+
