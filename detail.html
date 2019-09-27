@@ -3,17 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body{
+            background-color: #EFF3F7;
+        }
+        .inner {
+            text-align:  center;
+        }
+        .card{
+            text-align: center;
+            background-color: white;
+        }
+        h1{
+            margin: 30px;
+            font-size: 3em;
+        }
+        img{
+            width: 30%;
+            margin: 20px auto;
+            box-shadow: 20px 20px 20px gray;
+
+        }
+        p{
+            margin: 30px;
+            font-size: 1.2em;
+        }
+        .genre{
+            color: white;
+            background-color: lightgray;
+        }
+    </style>
 </head>
 <body>
-<div id="app">
+<div class="container">
+    <div class="row" id="app">
+        <div class="col-12 inner">
+            <p>Detail Page</p>
 
+        </div>
+    </div>
 </div>
+
 </body>
 </html>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     window.onload = async () => {
-        const app = document.querySelector("#app");
+        const col = document.querySelector(".col-12");
+        const loading = document.createElement("p");
+        loading.innerText = "Loading...";
+        col.appendChild(loading);
         const main = async () => {
             const id_var = window.location.href.split('?')[1].split('=')[1];
             console.log(id_var);
@@ -22,20 +62,30 @@
             );
             const data = movie_detail.data.data.movie;
 
-            const title = document.createElement('p');
+            const title = document.createElement('h1');
             const img = document.createElement('img');
+            const genre = document.createElement('p');
             const description = document.createElement('p');
+            const url = document.createElement('a');
+            const card = document.createElement('div');
+            card.classList.add('card');
             console.log(1);
             title.innerText = data.title;
             console.log(data);
 
             img.src = data.medium_cover_image;
             console.log(3);
-
+            genre.innerText = data.genres;
+            genre.classList.add('genre')
             description.innerText = data.description_full;
-            console.log(4);
-            app.append(title, img, description);
 
+            url.innerText = `Go to  ${data.title} in YTS`;
+            url.href = data.url;
+            console.log(4);
+            card.append(title,img, genre, description, url);
+            col.append(card);
+
+            col.removeChild(loading);
         };
 
         await main();
