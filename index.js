@@ -5,7 +5,7 @@ window.onload = async () => {
 	app.appendChild(loading);
 	const main = async () => {
 		const movie_list = await axios.get(
-			'https://yts.lt/api/v2/list_movies.json?sort_by=year'
+			'https://yts.lt/api/v2/list_movies.json?sort_by=like_count'
 		);
 
 		for (let i = 0; i < 20; i++) {
