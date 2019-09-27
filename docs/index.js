@@ -35,7 +35,7 @@ window.onload = async () => {
 			app.appendChild(card);
 
             let func = function onClickEventHandler(e) {
-                window.location = '/detail.html/?id='+`${a.id}`
+                window.location = 'detail.html/?id='+`${a.id}`
             };
 			card.addEventListener("click", func);
         }
